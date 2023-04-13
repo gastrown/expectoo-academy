@@ -70,7 +70,7 @@ export function Header() {
         >
           <div className="relative z-10 flex items-center gap-16">
             <Link href="/" aria-label="Home" className="">
-              <Image className="h-14 w-auto" src={logo} />
+              <Image className="h-14 w-auto" src={logo} alt="Image" />
             </Link>
             <div className="hidden lg:flex lg:gap-10">
               <NavLinks />

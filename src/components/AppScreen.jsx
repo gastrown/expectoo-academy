@@ -49,7 +49,7 @@ export function AppScreen ({ children, className, ...props }) {
   return (
     <div className={clsx('flex flex-col', className)} {...props}>
       <div className='flex justify-center px-4 pt-4'>
-        <Image className='h-10 w-auto' src={logo} />
+        <Image className='h-10 w-auto' src={logo} alt='Image' />
       </div>
       {children}
     </div>
