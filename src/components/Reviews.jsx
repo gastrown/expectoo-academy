@@ -214,10 +214,10 @@ export function Reviews() {
           id="reviews-title"
           className="text-3xl font-medium tracking-tight text-gray-900 sm:text-center"
         >
-          Expect More, Do More with Expectoo.
+          Don’t just take our word for it!
         </h2>
         <p className="mt-2 text-lg text-gray-600 sm:text-center">
-          Thousands of people have doubled their net-worth in the last 30 days.
+          See What Our Interns Have to Say About Their Experience!
         </p>
         <ReviewGrid />
       </Container>

@@ -2,31 +2,44 @@ import Head from "next/head";
 
 import { CallToAction } from "@/components/CallToAction";
 import { Faqs } from "@/components/Faqs";
-import { Footer } from "@/components/Footer";
+
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { Pricing } from "@/components/Pricing";
 import { PrimaryFeatures } from "@/components/PrimaryFeatures";
 import { Reviews } from "@/components/Reviews";
 import { SecondaryFeatures } from "@/components/SecondaryFeatures";
+import Footer from "@/components/Footer";
+import { useState } from "react";
+import Register from "@/components/Registeration";
+import Modal from "@/components/Modal";
 
 export default function Home() {
+  const [showForm, setShowForm] = useState(false);
+
+  const handleShowRegisterationForm = () => {
+    setShowForm(!showForm);
+  };
   return (
     <>
       <Head>
         <title>Expectoo Academy</title>
         <meta name="description" content="Tech Traning for Everyone " />
       </Head>
-      <Header />
+      <Header handleRegisterForm={handleShowRegisterationForm} />
       <main>
-        <Hero />
+        <Hero handleRegisterForm={handleShowRegisterationForm} />
         <PrimaryFeatures />
         <SecondaryFeatures />
         <CallToAction />
         <Reviews />
         <Faqs />
+        {showForm && (
+          <Modal>
+            <Register handleRegisterForm={handleShowRegisterationForm} />
+          </Modal>
+        )}
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

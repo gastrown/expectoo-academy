@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import logo from "/public/blackLogo.png";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
-import { Logo } from "@/components/Logo";
 import { NavLinks } from "@/components/NavLinks";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -47,7 +46,8 @@ function MobileNavLink({ children, ...props }) {
   );
 }
 
-export function Header() {
+export function Header(props) {
+  const { handleRegisterForm } = props;
   const [isSticky, setIsSticky] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
@@ -64,7 +64,7 @@ export function Header() {
     <header>
       <nav>
         <Container
-          className={`relative z-50 flex w-full justify-between py-8 ${
+          className={`relative z-50 flex w-full justify-between py-2 ${
             isSticky ? "sticky top-0 z-10" : ""
           }`}
         >
@@ -77,7 +77,7 @@ export function Header() {
             </div>
           </div>
           <div className="flex items-center gap-6">
-            <Popover className="lg:hidden">
+            {/* <Popover className="lg:hidden">
               {({ open }) => (
                 <>
                   <Popover.Button
@@ -139,9 +139,13 @@ export function Header() {
                   </AnimatePresence>
                 </>
               )}
-            </Popover>
+            </Popover> */}
 
-            <Button href="#" className="hidden lg:block">
+            <Button
+              href="#"
+              className="hidden lg:block"
+              onClick={handleRegisterForm}
+            >
               Get Started
             </Button>
           </div>

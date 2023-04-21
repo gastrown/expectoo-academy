@@ -7,16 +7,7 @@ import { AppScreen } from "@/components/AppScreen";
 import { AppStoreLink } from "@/components/AppStoreLink";
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
-import { PhoneFrame } from "@/components/PhoneFrame";
-import logoBbc from "@/images/logos/bbc.svg";
-import logoCbs from "@/images/logos/cbs.svg";
-import logoCnn from "@/images/logos/cnn.svg";
-import logoFastCompany from "@/images/logos/fast-company.svg";
-import logoForbes from "@/images/logos/forbes.svg";
-import logoHuffpost from "@/images/logos/huffpost.svg";
-import logoTechcrunch from "@/images/logos/techcrunch.svg";
-import logoWired from "@/images/logos/wired.svg";
-
+import luxury from "../images/Overlay.jpg";
 function BackgroundIllustration(props) {
   let id = useId();
 
@@ -334,38 +325,43 @@ function AppDemo() {
   );
 }
 
-export function Hero() {
+export function Hero(props) {
+  const { handleRegisterForm } = props;
   return (
-    <div className="overflow-hidden py-20 sm:py-32 lg:pb-32 xl:pb-36">
-      <Container>
-        <div className="lg:grid lg:grid-cols-12 lg:gap-x-8 lg:gap-y-20">
-          <div className="relative z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
-            <h1 className="text-4xl font-medium tracking-tight text-[#D31A86] ">
-              Start your tech journey today!
-            </h1>
-            <p className="mt-6 text-lg text-gray-600">
-              Register for our first edition of tech training and access
-              hands-on training that prepares you for today's job market
-              demands.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4">
-              <Button href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-                <span className="ml-2.5">Get Started</span>
-              </Button>
+    <div className="relative overflow-hidden">
+      <Image
+        src={luxury}
+        className="absolute inset-0 h-full w-full object-cover"
+        alt=""
+      />
+      <div className="relative bg-gray-900 bg-opacity-75 py-36">
+        <Container>
+          <div className="flex justify-center">
+            <div className="relative text-center z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
+              <h1 className="text-4xl font-medium capitalize tracking-tight text-[#D31A86]">
+                Start your tech journey today!
+              </h1>
+              <p className="mt-6 text-lg text-white font-bold">
+                Register for our first cohort of tech training and access
+                hands-on training that prepares you for today's job market
+                demands.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-4 justify-center">
+                <Button onClick={handleRegisterForm}>
+                  <span className="ml-2.5">Get Started</span>
+                </Button>
+              </div>
             </div>
-          </div>
-          <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6">
-            <BackgroundIllustration className="absolute left-1/2 top-4 h-[1026px] w-[1026px] -translate-x-1/3 stroke-gray-300/70 [mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] sm:top-16 sm:-translate-x-1/2 lg:-top-16 lg:ml-12 xl:-top-14 xl:ml-0" />
-            <div className="-mx-4 h-[448px] px-9 [mask-image:linear-gradient(to_bottom,white_60%,transparent)] sm:mx-0 lg:absolute lg:-inset-x-10 lg:-bottom-20 lg:-top-10 lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
-              {/* <PhoneFrame className="mx-auto max-w-[366px]" priority>
-                <AppDemo />
-              </PhoneFrame> */}
-              <Image src={hero} />
+            <div className="relative mt-10 sm:mt-20 lg:col-span-5 lg:row-span-2 lg:mt-0 xl:col-span-6">
+              {/* <BackgroundIllustration className="absolute left-1/2 top-4 h-[1026px] w-[1026px] -translate-x-1/3 stroke-gray-300/70 [mask-image:linear-gradient(to_bottom,white_20%,transparent_75%)] sm:top-16 sm:-translate-x-1/2 lg:-top-16 lg:ml-12 xl:-top-14 xl:ml-0" /> */}
+              <div className="-mx-4 hidden  h-[448px] px-9 mt-5  sm:mx-0 lg:absolute lg:-inset-x-10 lg:-bottom-20 lg:-top-10 lg:block lg:h-auto lg:px-0 lg:pt-10 xl:-bottom-32">
+              {/* <Image src={hero} /> */}
             </div>
+            </div>
+            <div className="relative -mt-4 lg:col-span-7 lg:mt-0 xl:col-span-6"></div>
           </div>
-          <div className="relative -mt-4 lg:col-span-7 lg:mt-0 xl:col-span-6"></div>
-        </div>
-      </Container>
+        </Container>
+      </div>
     </div>
   );
 }

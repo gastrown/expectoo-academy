@@ -49,7 +49,7 @@ export function AppScreen ({ children, className, ...props }) {
   return (
     <div className={clsx('flex flex-col', className)} {...props}>
       <div className='flex justify-center px-4 pt-4'>
-        <Image className='h-10 w-auto' src={logo} alt='Image' />
+       
       </div>
       {children}
     </div>
@@ -87,7 +87,7 @@ AppScreen.Body = forwardRef(function AppScreenBody (
   return (
     <div
       ref={ref}
-      className={clsx('mt-6 flex-auto rounded-t-2xl bg-white', className)}
+      className={clsx('mt-6  rounded-t-2xl ', className)}
     >
       {children}
     </div>
