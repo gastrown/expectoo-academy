@@ -8,6 +8,8 @@ import { Container } from "@/components/Container";
 function Link() {
   return (
     <a
+      target="_blank"
+      rel="noreferrer noopener"
       className="text-red-600 underline"
       href="https://bit.ly/expectoo_academy"
     >
@@ -73,6 +75,8 @@ export function Faqs() {
           <ul role="list" className="mt-3 flex space-x-6">
             <li>
               <a
+                target="_blank"
+                rel="noreferrer noopener"
                 className="text-indigo-200 hover:text-indigo-100"
                 href=" https://www.facebook.com/expectoong"
               >
@@ -86,6 +90,8 @@ export function Faqs() {
             </li>
             <li>
               <a
+                target="_blank"
+                rel="noreferrer noopener"
                 className="text-indigo-200 hover:text-indigo-100"
                 href="https://www.instagram.com/expectoo_ng"
               >
@@ -99,6 +105,8 @@ export function Faqs() {
             </li>
             <li>
               <a
+                target="_blank"
+                rel="noreferrer noopener"
                 className="text-indigo-200 hover:text-indigo-100"
                 href=" https://twitter.com/expectoo_ng"
               >
@@ -108,6 +116,8 @@ export function Faqs() {
             </li>
             <li>
               <a
+                target="_blank"
+                rel="noreferrer noopener"
                 className="text-indigo-200 hover:text-indigo-100"
                 href="mailto:expectoo.company@gmail.com"
               >

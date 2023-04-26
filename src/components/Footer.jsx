@@ -18,6 +18,8 @@ export default function Footer () {
           {navigation.main.map((item) => (
             <div key={item.name} className='pb-6'>
               <a
+                target='_blank'
+                rel='noreferrer noopener'
                 href={item.href}
                 className='text-lg leading-6 text-gray-600 hover:text-gray-900'
               >
@@ -30,6 +32,8 @@ export default function Footer () {
           <ul role='list' className='mt-3 flex space-x-6'>
             <li>
               <a
+                target='_blank'
+                rel='noreferrer noopener'
                 className='text-indigo-200 hover:text-indigo-100'
                 href='https://www.facebook.com/expectoong'
               >
@@ -43,6 +47,8 @@ export default function Footer () {
             </li>
             <li>
               <a
+                target='_blank'
+                rel='noreferrer noopener'
                 className='text-indigo-200 hover:text-indigo-100'
                 href='  https://www.instagram.com/expectoo_ng/ '
               >
@@ -56,6 +62,8 @@ export default function Footer () {
             </li>
             <li>
               <a
+                target='_blank'
+                rel='noreferrer noopener'
                 className='text-indigo-200 hover:text-indigo-100'
                 href='https://twitter.com/expectoo_ng'
               >
@@ -67,6 +75,8 @@ export default function Footer () {
               <a
                 className='text-indigo-200 hover:text-indigo-100'
                 href='mailto:expectoo.company@gmail.com'
+                target='_blank'
+                rel='noreferrer noopener'
               >
                 <span className='sr-only'>Twitter</span>
                 <Image src={mail} alt='Twitter logo' className='h-10 w-10' />

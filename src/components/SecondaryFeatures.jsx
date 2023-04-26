@@ -1,6 +1,10 @@
 import { useId } from 'react'
-
+import fullStack from '/public/fullstack.jpeg'
+import backend from '/public/backend.jpeg'
+import frontend from '/public/frontend.jpeg'
 import { Container } from '@/components/Container'
+import Image from 'next/image'
+import { Button } from './Button'
 const posts = [
   {
     id: 1,
@@ -23,18 +27,24 @@ const posts = [
 const features = [
   {
     name: 'Frontend Development',
+    imageUrl: frontend,
+    price: 200000,
     description:
       'Learn the essential skills and tools needed to build stunning user interfaces from veteran tutors. Get hands-on experience with popular frameworks and languages such as React, Vue.js, HTML, CSS, and JavaScript to kickstart your career in web development.',
     icon: DeviceArrowIcon
   },
   {
     name: 'Backend Development',
+    price: 200000,
+    imageUrl: backend,
     description:
       'Our backend development bootcamp will equip you with the knowledge and practical skills needed to build robust and scalable server-side applications. Learn how to work with popular programming languages and frameworks like Node.js, Express, and MongoDB to build RESTful APIs and manage databases, and take your career in web development to the next level.',
     icon: DeviceCardsIcon
   },
   {
     name: 'Full Stack Development',
+    imageUrl: fullStack,
+    price: 400000,
     description:
       'Become a full-stack developer with our comprehensive bootcamp that covers both frontend and backend development. Learn how to build dynamic and responsive web applications using popular technologies such as React, Node.js, Express, and MongoDB, and acquire the skills necessary to take on any web development project with confidence.',
     icon: DeviceClockIcon
@@ -194,14 +204,18 @@ export function SecondaryFeatures () {
       className='py-20 sm:py-32'
     >
       <Container>
-        <div className='mx-auto max-w-2xl sm:text-center'>
+        <div className='mx-auto max-w-2xl md:max-w-4xl sm:text-center'>
           <h2 className='text-3xl font-medium tracking-tight text-gray-900'>
             Courses Offered.
           </h2>
           <p className='mt-2 text-lg text-gray-600'>
             We train individuals in an immersive learning environment that will
             challenge them to develop new skills and push themselves to new
-            heights in developing software.
+            heights in developing software. We offer flexible payment options,
+            including the choice of paying just 70% of the total amount as the
+            first installment. This allows you to start your training without
+            any financial burden and pay the remaining amount in a more
+            manageable way.
           </p>
         </div>
         <ul
@@ -255,18 +269,33 @@ export function SecondaryFeatures () {
           ))} */}
 
           {features.map((feature) => (
-            <li
-              key={feature.name}
-              className='rounded-2xl border border-gray-200 p-8'
-            >
-              <feature.icon className='mx-auto h-8 w-8' />
-              <h3 className='mt-6 text-center font-semibold text-gray-900'>
-                {feature.name}
-              </h3>
-              <p className='mt-2 text-center text-gray-700'>
-                {feature.description}
-              </p>
-            </li>
+            <div class='max-w-sm overflow-hidden rounded shadow-lg'>
+              <Image class='w-full' src={feature.imageUrl} alt='Mountain' />
+              <div class='px-6 py-4'>
+                <div class='my-2 mb-2 text-right text-2xl font-bold text-red-600'>
+                  {feature.price.toLocaleString('en-NG', {
+                    style: 'currency',
+                    currency: 'NGN'
+                  })}
+                </div>
+                <div class='mb-2 text-xl font-bold'>{feature.name}</div>
+                <p class='text-base text-gray-700'>{feature.description}</p>
+              </div>
+
+              <div class='px-6 pb-2 pt-8' />
+            </div>
+            // <li
+            //   key={feature.name}
+            //   className='rounded-2xl border border-gray-200 p-8'
+            // >
+            //   <feature.icon className='mx-auto h-8 w-8' />
+            //   <h3 className='mt-6 text-center font-semibold text-gray-900'>
+            //     {feature.name}
+            //   </h3>
+            //   <p className='mt-2 text-center text-gray-700'>
+            //     {feature.description}
+            //   </p>
+            // </li>
           ))}
         </ul>
       </Container>

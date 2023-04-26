@@ -5,7 +5,14 @@ import facebook from "../images/facebook.png";
 import instagram from "../images/instagram.png";
 import Image from "next/image";
 import register from "../images/register.jpeg";
+import { plunk } from "@/plunk";
+import { useState } from "react";
+import Loader from "./Loader";
+import { useRouter } from "next/router";
 export default function Register(props) {
+  const [formData, setFormData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter()
   const { handleRegisterForm } = props;
   const notificationMethods = [
     { id: "1", title: "Male" },
@@ -23,11 +30,64 @@ export default function Register(props) {
   ];
   const surveyQuestions = [
     { id: "1", title: "Flyer" },
-    { id: "2", title: "Tech harcourt" },
-    { id: "2", title: "Radio Station" },
     { id: "2", title: "Social Media Ad" },
     { id: "2", title: "Friends and Family" }
   ];
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      gender,
+      location,
+      course,
+      pc,
+      advert
+    } = formData;
+
+    await plunk.events.track({
+      email: email,
+      event: "new-applicants",
+      data: {
+        firstName,
+        lastName,
+        email,
+        phone,
+        gender,
+        location,
+        course,
+        pc,
+        advert
+      }
+    });
+    await plunk.events.track({
+      email: "expectoo.company@gmail.com",
+      event: "new-registration",
+      data: {
+        firstName,
+        lastName,
+        email,
+        phone,
+        gender,
+        location,
+        course,
+        pc,
+        advert
+      }
+    });
+
+    setLoading(false);
+    handleRegisterForm()
+  }
+
   return (
     <div className="">
       <div className="mx-auto  max-w-6xl lg:px-8">
@@ -219,8 +279,7 @@ export default function Register(props) {
                 Please fill out this form below.
               </h3>
               <form
-                action="#"
-                method="POST"
+                onSubmit={handleSubmit}
                 className="mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8"
               >
                 <div>
@@ -232,8 +291,9 @@ export default function Register(props) {
                   </label>
                   <div className="mt-1">
                     <input
+                      onChange={handleInputChange}
                       type="text"
-                      name="first-name"
+                      name="firstName"
                       id="first-name"
                       autoComplete="given-name"
                       className="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -249,8 +309,9 @@ export default function Register(props) {
                   </label>
                   <div className="mt-1">
                     <input
+                      onChange={handleInputChange}
                       type="text"
-                      name="last-name"
+                      name="lastName"
                       id="last-name"
                       autoComplete="family-name"
                       className="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -266,6 +327,7 @@ export default function Register(props) {
                   </label>
                   <div className="mt-1">
                     <input
+                      onChange={handleInputChange}
                       id="email"
                       name="email"
                       type="email"
@@ -286,6 +348,7 @@ export default function Register(props) {
                   <div className="mt-1">
                     <input
                       type="text"
+                      onChange={handleInputChange}
                       name="phone"
                       id="phone"
                       autoComplete="tel"
@@ -309,10 +372,11 @@ export default function Register(props) {
                       {notificationMethods.map((el) => (
                         <div key={el.id} className="flex items-center">
                           <input
+                            onChange={handleInputChange}
                             id={el.id}
-                            name="notification-method"
+                            name="gender"
+                            value={el.title}
                             type="radio"
-                            defaultChecked={el.id === "email"}
                             className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                           />
                           <label
@@ -335,6 +399,7 @@ export default function Register(props) {
                   </label>
                   <div className="mt-1">
                     <input
+                      onChange={handleInputChange}
                       type="text"
                       name="location"
                       className="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -348,10 +413,9 @@ export default function Register(props) {
                   <fieldset className="mt-2">
                     <div className="space-y-4  ">
                       <select
-                        id="location"
-                        name="location"
+                        onChange={handleInputChange}
+                        name="course"
                         className="mt-2 block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        defaultValue="Canada"
                       >
                         <option value="" disabled selected>
                           Select Course of Interest
@@ -375,11 +439,12 @@ export default function Register(props) {
                       {ownPc.map((el) => (
                         <div key={el.id} className="flex items-center">
                           <input
+                            onChange={handleInputChange}
                             id={el.id}
-                            name="notification-method"
+                            value={el.title}
+                            name="pc"
                             type="radio"
                             required
-                            defaultChecked={el.id === "email"}
                             className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                           />
                           <label
@@ -402,11 +467,12 @@ export default function Register(props) {
                   </label>
                   <div className="mt-1">
                     <select
-                      name="medium"
+                      onChange={handleInputChange}
+                      name="advert"
                       className="mt-2 block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
                       <option disabled selected>
-                        Select Course of Interest
+                        Select an option
                       </option>
                       {surveyQuestions.map((el) => (
                         <>
@@ -426,15 +492,19 @@ export default function Register(props) {
                   >
                     Cancel
                   </Button>
-                  <Button href="#" className="">
+                  <button
+                    type="submit"
+                    className="rounded-lg bg-[#D31A86]  p-2 px-4 text-white"
+                  >
                     Submit
-                  </Button>
+                  </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
+      {loading && <Loader />}
     </div>
   );
 }

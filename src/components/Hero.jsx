@@ -334,14 +334,14 @@ export function Hero(props) {
         className="absolute inset-0 h-full w-full object-cover"
         alt=""
       />
-      <div className="relative bg-gray-900 bg-opacity-75 py-36">
+      <div className="relative bg-black bg-opacity-75 py-36">
         <Container>
           <div className="flex justify-center">
             <div className="relative text-center z-10 mx-auto max-w-2xl lg:col-span-7 lg:max-w-none lg:pt-6 xl:col-span-6">
-              <h1 className="text-4xl font-medium capitalize tracking-tight text-[#D31A86]">
+              <h1 className="text-4xl md:text-5xl font-bold capitalize tracking-tight text-[#D31A86]">
                 Start your tech journey today!
               </h1>
-              <p className="mt-6 text-lg text-white font-bold">
+              <p className="mt-6 text-xl text-white font-bold md:max-w-xl mx-auto">
                 Register for our first cohort of tech training and access
                 hands-on training that prepares you for today's job market
                 demands.
