@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 export default function Register(props) {
   const [formData, setFormData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
   const { handleRegisterForm } = props;
   const notificationMethods = [
     { id: "1", title: "Male" },
@@ -85,7 +85,7 @@ export default function Register(props) {
     });
 
     setLoading(false);
-    handleRegisterForm()
+    handleRegisterForm();
   }
 
   return (
@@ -295,6 +295,7 @@ export default function Register(props) {
                       type="text"
                       name="firstName"
                       id="first-name"
+                      required
                       autoComplete="given-name"
                       className="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
@@ -312,6 +313,7 @@ export default function Register(props) {
                       onChange={handleInputChange}
                       type="text"
                       name="lastName"
+                      required
                       id="last-name"
                       autoComplete="family-name"
                       className="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -330,6 +332,7 @@ export default function Register(props) {
                       onChange={handleInputChange}
                       id="email"
                       name="email"
+                      required
                       type="email"
                       autoComplete="email"
                       className="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -351,6 +354,7 @@ export default function Register(props) {
                       onChange={handleInputChange}
                       name="phone"
                       id="phone"
+                      required
                       autoComplete="tel"
                       className="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                       aria-describedby="phone-optional"
@@ -375,6 +379,7 @@ export default function Register(props) {
                             onChange={handleInputChange}
                             id={el.id}
                             name="gender"
+                            required
                             value={el.title}
                             type="radio"
                             className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
@@ -401,6 +406,7 @@ export default function Register(props) {
                     <input
                       onChange={handleInputChange}
                       type="text"
+                      required
                       name="location"
                       className="block w-full rounded-md border-gray-300 px-4 py-3 text-gray-900 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                     />
@@ -413,6 +419,7 @@ export default function Register(props) {
                   <fieldset className="mt-2">
                     <div className="space-y-4  ">
                       <select
+                        required
                         onChange={handleInputChange}
                         name="course"
                         className="mt-2 block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -441,10 +448,10 @@ export default function Register(props) {
                           <input
                             onChange={handleInputChange}
                             id={el.id}
+                            required
                             value={el.title}
                             name="pc"
                             type="radio"
-                            required
                             className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
                           />
                           <label
@@ -469,6 +476,7 @@ export default function Register(props) {
                     <select
                       onChange={handleInputChange}
                       name="advert"
+                      required
                       className="mt-2 block w-full rounded-md border-0 py-2.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     >
                       <option disabled selected>
