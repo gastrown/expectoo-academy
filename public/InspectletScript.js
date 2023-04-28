@@ -1,4 +1,7 @@
 (function () {
+  if (typeof window.__insp === 'undefined') {
+    window.__insp = []
+  }
   window._insp = window._insp || []
   __insp.push(['wid', 1301508767])
   var ldinsp = function () {

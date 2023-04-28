@@ -44,6 +44,7 @@ export default function Home() {
           </Modal>
         )}
       </main>
+
       <Footer />
     </>
   );
