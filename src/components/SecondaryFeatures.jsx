@@ -1,10 +1,11 @@
-import { useId } from 'react'
+import { useEffect, useId, useState } from 'react'
 import fullStack from '/public/fullstack.jpeg'
 import backend from '/public/backend.jpeg'
 import frontend from '/public/frontend.jpeg'
 import { Container } from '@/components/Container'
 import Image from 'next/image'
-import { Button } from './Button'
+import { PaystackButton } from 'react-paystack'
+
 const posts = [
   {
     id: 1,
@@ -28,14 +29,16 @@ const features = [
   {
     name: 'Frontend Development',
     imageUrl: frontend,
-    price: 200000,
+    amount: 200000,
+    price: 20000000,
     description:
       'Learn the essential skills and tools needed to build stunning user interfaces from veteran tutors. Get hands-on experience with popular frameworks and languages such as React, Vue.js, HTML, CSS, and JavaScript to kickstart your career in web development.',
     icon: DeviceArrowIcon
   },
   {
     name: 'Backend Development',
-    price: 200000,
+    amount: 200000,
+    price: 20000000,
     imageUrl: backend,
     description:
       'Our backend development bootcamp will equip you with the knowledge and practical skills needed to build robust and scalable server-side applications. Learn how to work with popular programming languages and frameworks like Node.js, Express, and MongoDB to build RESTful APIs and manage databases, and take your career in web development to the next level.',
@@ -44,7 +47,8 @@ const features = [
   {
     name: 'Full Stack Development',
     imageUrl: fullStack,
-    price: 400000,
+    amount: 400000,
+    price: 40000000,
     description:
       'Become a full-stack developer with our comprehensive bootcamp that covers both frontend and backend development. Learn how to build dynamic and responsive web applications using popular technologies such as React, Node.js, Express, and MongoDB, and acquire the skills necessary to take on any web development project with confidence.',
     icon: DeviceClockIcon
@@ -127,84 +131,43 @@ function DeviceClockIcon (props) {
   )
 }
 
-function DeviceListIcon (props) {
-  return (
-    <svg viewBox='0 0 32 32' fill='none' aria-hidden='true' {...props}>
-      <path
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M9 0a4 4 0 00-4 4v24a4 4 0 004 4h14a4 4 0 004-4V4a4 4 0 00-4-4H9zm0 2a2 2 0 00-2 2v24a2 2 0 002 2h14a2 2 0 002-2V4a2 2 0 00-2-2h-1.382a1 1 0 00-.894.553l-.448.894a1 1 0 01-.894.553h-6.764a1 1 0 01-.894-.553l-.448-.894A1 1 0 0010.382 2H9z'
-        fill='#737373'
-      />
-      <circle cx={11} cy={14} r={2} fill='#171717' />
-      <circle cx={11} cy={20} r={2} fill='#171717' />
-      <circle cx={11} cy={26} r={2} fill='#171717' />
-      <path
-        d='M16 14h6M16 20h6M16 26h6'
-        stroke='#737373'
-        strokeWidth={2}
-        strokeLinecap='square'
-      />
-      <circle cx={16} cy={16} r={16} fill='#A3A3A3' fillOpacity={0.2} />
-    </svg>
-  )
-}
-
-function DeviceLockIcon (props) {
-  return (
-    <svg viewBox='0 0 32 32' aria-hidden='true' {...props}>
-      <circle cx={16} cy={16} r={16} fill='#A3A3A3' fillOpacity={0.2} />
-      <path
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M5 4a4 4 0 014-4h14a4 4 0 014 4v10h-2V4a2 2 0 00-2-2h-1.382a1 1 0 00-.894.553l-.448.894a1 1 0 01-.894.553h-6.764a1 1 0 01-.894-.553l-.448-.894A1 1 0 0010.382 2H9a2 2 0 00-2 2v24a2 2 0 002 2h5v2H9a4 4 0 01-4-4V4z'
-        fill='#737373'
-      />
-      <path
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M18 19.5a3.5 3.5 0 117 0V22a2 2 0 012 2v6a2 2 0 01-2 2h-7a2 2 0 01-2-2v-6a2 2 0 012-2v-2.5zm2 2.5h3v-2.5a1.5 1.5 0 00-3 0V22z'
-        fill='#171717'
-      />
-    </svg>
-  )
-}
-
-function DeviceChartIcon (props) {
-  return (
-    <svg viewBox='0 0 32 32' fill='none' aria-hidden='true' {...props}>
-      <path
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M9 0a4 4 0 00-4 4v24a4 4 0 004 4h14a4 4 0 004-4V4a4 4 0 00-4-4H9zm0 2a2 2 0 00-2 2v24a2 2 0 002 2h14a2 2 0 002-2V4a2 2 0 00-2-2h-1.382a1 1 0 00-.894.553l-.448.894a1 1 0 01-.894.553h-6.764a1 1 0 01-.894-.553l-.448-.894A1 1 0 0010.382 2H9z'
-        fill='#737373'
-      />
-      <path
-        fillRule='evenodd'
-        clipRule='evenodd'
-        d='M23 13.838V26a2 2 0 01-2 2H11a2 2 0 01-2-2V15.65l2.57 3.212a1 1 0 001.38.175L15.4 17.2a1 1 0 011.494.353l1.841 3.681c.399.797 1.562.714 1.843-.13L23 13.837z'
-        fill='#171717'
-      />
-      <path
-        d='M10 12h12'
-        stroke='#737373'
-        strokeWidth={2}
-        strokeLinecap='square'
-      />
-      <circle cx={16} cy={16} r={16} fill='#A3A3A3' fillOpacity={0.2} />
-    </svg>
-  )
-}
-
 export function SecondaryFeatures () {
+  const [price, setPrice] = useState(20000000)
+
+  const config = {
+    email: 'epectoo.company@gmail.com',
+    publicKey: 'pk_live_4b858db970be95c5f14023e4b6f371d979bcb988'
+  }
+
+  const handlePaystackSuccessAction = (reference) => {
+    console.log('success')
+  }
+
+  const handlePaystackCloseAction = () => {
+    console.log('closed')
+  }
+
+  function getComponentPropsWithAmount (amount) {
+    const reference = `${Date.now()}_${Math.random()
+      .toString(36)
+      .substring(2, 11)}`
+    return {
+      ...config,
+      reference: reference,
+      amount: amount,
+      text: 'Pay Now',
+      onSuccess: (reference) => handlePaystackSuccessAction(reference),
+      onClose: handlePaystackCloseAction
+    }
+  }
   return (
     <section
       id='secondary-features'
       aria-label='Features for building a portfolio'
-      className='py-20 sm:py-32'
+      className='relative py-20 sm:py-32'
     >
       <Container>
-        <div className='mx-auto max-w-2xl md:max-w-4xl sm:text-center'>
+        <div className='mx-auto max-w-2xl sm:text-center md:max-w-4xl'>
           <h2 className='text-3xl font-medium tracking-tight text-gray-900'>
             Courses Offered.
           </h2>
@@ -222,58 +185,12 @@ export function SecondaryFeatures () {
           role='list'
           className='mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 text-sm sm:mt-20 sm:grid-cols-2 md:gap-y-10 lg:max-w-none lg:grid-cols-3'
         >
-          {/* {posts.map((post) => (
-            <article
-              key={post.id}
-              className='relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-black px-8 pb-8 pt-80 sm:pt-48 lg:pt-80'
-            >
-              <img
-                src={post.imageUrl}
-                alt=''
-                className='absolute inset-0 -z-10 h-full w-full object-cover'
-              />
-              <div className='absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40' />
-              <div className='absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10' />
-
-              <div className='flex flex-wrap items-center gap-y-1 overflow-hidden text-sm leading-6 text-gray-300'>
-                <time dateTime={post.datetime} className='mr-8'>
-                  {post.date}
-                </time>
-                <div className='-ml-4 flex items-center gap-x-4'>
-                  <svg
-                    viewBox='0 0 2 2'
-                    className='-ml-0.5 h-0.5 w-0.5 flex-none fill-white/50'
-                  >
-                    <circle cx={1} cy={1} r={1} />
-                  </svg>
-                  <div className='flex gap-x-2.5'>
-                    <img
-                      src={post.author.imageUrl}
-                      alt=''
-                      className='h-6 w-6 flex-none rounded-full bg-white/10'
-                    />
-                    {post.author.name}
-                  </div>
-                </div>
-              </div>
-              <div className='absolute right-0 top-0 mr-3 mt-3 rounded-full bg-red-600 px-2 py-1 text-xs font-semibold text-white'>
-               200000
-              </div>
-              <h3 className='mt-3 text-lg font-semibold leading-6 text-white'>
-                <a href={post.href}>
-                  <span className='absolute inset-0' />
-                  {post.title}
-                </a>
-              </h3>
-            </article>
-          ))} */}
-
-          {features.map((feature) => (
+          {features.map((feature, index) => (
             <div class='max-w-sm overflow-hidden rounded shadow-lg'>
               <Image class='w-full' src={feature.imageUrl} alt='Mountain' />
               <div class='px-6 py-4'>
                 <div class='my-2 mb-2 text-right text-2xl font-bold text-red-600'>
-                  {feature.price.toLocaleString('en-NG', {
+                  {feature.amount.toLocaleString('en-NG', {
                     style: 'currency',
                     currency: 'NGN'
                   })}
@@ -282,20 +199,23 @@ export function SecondaryFeatures () {
                 <p class='text-base text-gray-700'>{feature.description}</p>
               </div>
 
-              <div class='px-6 pb-2 pt-8' />
+              {index >= 1 && (
+                <div className=' flex justify-center px-6 pb-2 pt-8 '>
+                  <PaystackButton
+                    className='  inline-flex items-center gap-x-2 rounded-md bg-[#D31A86] px-8  py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#D31A86] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
+                    {...getComponentPropsWithAmount(feature.price)}
+                  />
+                </div>
+              )}
+              {index <= 0 && (
+                <div className=' flex justify-center px-6 pb-2 md:mt-20 '>
+                  <PaystackButton
+                    className='  inline-flex items-center gap-x-2 rounded-md bg-[#D31A86] px-8  py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-[#D31A86] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
+                    {...getComponentPropsWithAmount(feature.price)}
+                  />
+                </div>
+              )}
             </div>
-            // <li
-            //   key={feature.name}
-            //   className='rounded-2xl border border-gray-200 p-8'
-            // >
-            //   <feature.icon className='mx-auto h-8 w-8' />
-            //   <h3 className='mt-6 text-center font-semibold text-gray-900'>
-            //     {feature.name}
-            //   </h3>
-            //   <p className='mt-2 text-center text-gray-700'>
-            //     {feature.description}
-            //   </p>
-            // </li>
           ))}
         </ul>
       </Container>

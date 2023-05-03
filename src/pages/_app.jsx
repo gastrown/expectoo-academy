@@ -1,10 +1,12 @@
-
+import { initGA } from '@/analytics'
 import '@/styles/tailwind.css'
 import 'focus-visible'
+import { useEffect } from 'react'
 
-import ReactGA from 'react-ga'
 export default function App ({ Component, pageProps }) {
-  ReactGA.initialize('G-EHW63WPZPZ')
+  useEffect(() => {
+    initGA()
+  }, [])
 
   return <Component {...pageProps} />
 }

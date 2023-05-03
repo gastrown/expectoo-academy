@@ -9,18 +9,19 @@ import { PrimaryFeatures } from "@/components/PrimaryFeatures";
 import { Reviews } from "@/components/Reviews";
 import { SecondaryFeatures } from "@/components/SecondaryFeatures";
 import Footer from "@/components/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Register from "@/components/Registeration";
 import Modal from "@/components/Modal";
 import ReactGA from "react-ga";
 
 export default function Home() {
   const [showForm, setShowForm] = useState(false);
-  if (typeof window !== "undefined") {
-    // code that uses the window object
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }
-
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      // code that uses the window object
+      ReactGA.pageview(window.location.pathname + window.location.search);
+    }
+  });
   const handleShowRegisterationForm = () => {
     setShowForm(!showForm);
   };
