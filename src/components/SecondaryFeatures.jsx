@@ -5,55 +5,10 @@ import frontend from '/public/frontend.jpeg'
 import { Container } from '@/components/Container'
 import Image from 'next/image'
 import { PaystackButton } from 'react-paystack'
+import { RadioGroup } from '@headlessui/react'
+import { CheckIcon } from '@heroicons/react/20/solid'
 
-const posts = [
-  {
-    id: 1,
-    title: 'Boost your conversion rate',
-    href: '#',
-    description:
-      'Illo sint voluptas. Error voluptates culpa eligendi. Hic vel totam vitae illo. Non aliquid explicabo necessitatibus unde. Sed exercitationem placeat consectetur nulla deserunt vel. Iusto corrupti dicta.',
-    imageUrl:
-      'https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80',
-    date: 'Mar 16, 2020',
-    datetime: '2020-03-16',
-    author: {
-      name: 'Michael Foster',
-      imageUrl:
-        'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-    }
-  }
-  // More posts...
-]
-const features = [
-  {
-    name: 'Frontend Development',
-    imageUrl: frontend,
-    amount: 200000,
-    price: 20000000,
-    description:
-      'Learn the essential skills and tools needed to build stunning user interfaces from veteran tutors. Get hands-on experience with popular frameworks and languages such as React, Vue.js, HTML, CSS, and JavaScript to kickstart your career in web development.',
-    icon: DeviceArrowIcon
-  },
-  {
-    name: 'Backend Development',
-    amount: 200000,
-    price: 20000000,
-    imageUrl: backend,
-    description:
-      'Our backend development bootcamp will equip you with the knowledge and practical skills needed to build robust and scalable server-side applications. Learn how to work with popular programming languages and frameworks like Node.js, Express, and MongoDB to build RESTful APIs and manage databases, and take your career in web development to the next level.',
-    icon: DeviceCardsIcon
-  },
-  {
-    name: 'Full Stack Development',
-    imageUrl: fullStack,
-    amount: 400000,
-    price: 40000000,
-    description:
-      'Become a full-stack developer with our comprehensive bootcamp that covers both frontend and backend development. Learn how to build dynamic and responsive web applications using popular technologies such as React, Node.js, Express, and MongoDB, and acquire the skills necessary to take on any web development project with confidence.',
-    icon: DeviceClockIcon
-  }
-]
+
 
 function DeviceArrowIcon (props) {
   return (
@@ -131,8 +86,15 @@ function DeviceClockIcon (props) {
   )
 }
 
-export function SecondaryFeatures () {
+const frequencies = [
+  { value: 'installment', label: 'Installment', priceSuffix: '/installment' },
+  { value: 'complete', label: 'Full Payment', priceSuffix: '/complete' },
+]
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}export function SecondaryFeatures () {
   const [price, setPrice] = useState(20000000)
+  const [frequency, setFrequency] = useState(frequencies[0])
 
   const config = {
     email: 'epectoo.company@gmail.com',
@@ -160,6 +122,35 @@ export function SecondaryFeatures () {
       onClose: handlePaystackCloseAction
     }
   }
+    const features = [
+        {
+            name: 'Frontend Development',
+            imageUrl: frontend,
+            amount: frequency.value === 'complete' ? 200000 : 140000,
+            price: frequency.value === 'complete' ? 20000000 : 14000000,
+            description:
+                'Learn the essential skills and tools needed to build stunning user interfaces from veteran tutors. Get hands-on experience with popular frameworks and languages such as React, Vue.js, HTML, CSS, and JavaScript to kickstart your career in web development.',
+            icon: DeviceArrowIcon
+        },
+        {
+            name: 'Backend Development',
+            imageUrl: backend,
+            amount: frequency.value === 'complete' ? 200000 : 140000,
+            price: frequency.value === 'complete' ? 20000000 : 14000000,
+            description:
+                'Our backend development bootcamp will equip you with the knowledge and practical skills needed to build robust and scalable server-side applications. Learn how to work with popular programming languages and frameworks like Node.js, Express, and MongoDB to build RESTful APIs and manage databases, and take your career in web development to the next level.',
+            icon: DeviceCardsIcon
+        },
+        {
+            name: 'Full Stack Development',
+            imageUrl: fullStack,
+            amount:  frequency.value === 'complete' ?  400000 : 280000,
+            price: frequency.value === 'complete' ? 40000000 : 28000000,
+            description:
+                'Become a full-stack developer with our comprehensive bootcamp that covers both frontend and backend development. Learn how to build dynamic and responsive web applications using popular technologies such as React, Node.js, Express, and MongoDB, and acquire the skills necessary to take on any web development project with confidence.',
+            icon: DeviceClockIcon
+        }
+    ];
   return (
     <section
       id='secondary-features'
@@ -180,6 +171,29 @@ export function SecondaryFeatures () {
             any financial burden and pay the remaining amount in a more
             manageable way.
           </p>
+        </div>
+        <div className="mt-16 flex justify-center">
+          <RadioGroup
+              value={frequency}
+              onChange={setFrequency}
+              className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
+          >
+            <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
+            {frequencies.map((option) => (
+                <RadioGroup.Option
+                    key={option.value}
+                    value={option}
+                    className={({ checked }) =>
+                        classNames(
+                            checked ? 'bg-indigo-600 text-white' : 'text-gray-500',
+                            'cursor-pointer rounded-full px-2.5 py-1'
+                        )
+                    }
+                >
+                  <span>{option.label}</span>
+                </RadioGroup.Option>
+            ))}
+          </RadioGroup>
         </div>
         <ul
           role='list'
