@@ -393,7 +393,7 @@ export function PrimaryFeatures () {
       className='bg-gray-900 py-20 sm:py-32'
     >
       <Container>
-        <div className='mx-auto max-w-2xl lg:mx-0 lg:max-w-3xl'>
+        <div className='mx-auto text-center'>
           <h2 className='text-3xl  font-bold tracking-tight text-[#D31A86] xl:text-4xl '>
             Why Expectoo Academy is Right for You.
           </h2>

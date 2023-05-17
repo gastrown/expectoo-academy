@@ -8,8 +8,6 @@ import { PaystackButton } from 'react-paystack'
 import { RadioGroup } from '@headlessui/react'
 import { CheckIcon } from '@heroicons/react/20/solid'
 
-
-
 function DeviceArrowIcon (props) {
   return (
     <svg viewBox='0 0 32 32' aria-hidden='true' {...props}>
@@ -88,11 +86,12 @@ function DeviceClockIcon (props) {
 
 const frequencies = [
   { value: 'installment', label: 'Installment', priceSuffix: '/installment' },
-  { value: 'complete', label: 'Full Payment', priceSuffix: '/complete' },
+  { value: 'complete', label: 'Full Payment', priceSuffix: '/complete' }
 ]
-function classNames(...classes) {
+function classNames (...classes) {
   return classes.filter(Boolean).join(' ')
-}export function SecondaryFeatures () {
+}
+export function SecondaryFeatures () {
   const [price, setPrice] = useState(20000000)
   const [frequency, setFrequency] = useState(frequencies[0])
 
@@ -122,35 +121,35 @@ function classNames(...classes) {
       onClose: handlePaystackCloseAction
     }
   }
-    const features = [
-        {
-            name: 'Frontend Development',
-            imageUrl: frontend,
-            amount: frequency.value === 'complete' ? 200000 : 140000,
-            price: frequency.value === 'complete' ? 20000000 : 14000000,
-            description:
-                'Learn the essential skills and tools needed to build stunning user interfaces from veteran tutors. Get hands-on experience with popular frameworks and languages such as React, Vue.js, HTML, CSS, and JavaScript to kickstart your career in web development.',
-            icon: DeviceArrowIcon
-        },
-        {
-            name: 'Backend Development',
-            imageUrl: backend,
-            amount: frequency.value === 'complete' ? 200000 : 140000,
-            price: frequency.value === 'complete' ? 20000000 : 14000000,
-            description:
-                'Our backend development bootcamp will equip you with the knowledge and practical skills needed to build robust and scalable server-side applications. Learn how to work with popular programming languages and frameworks like Node.js, Express, and MongoDB to build RESTful APIs and manage databases, and take your career in web development to the next level.',
-            icon: DeviceCardsIcon
-        },
-        {
-            name: 'Full Stack Development',
-            imageUrl: fullStack,
-            amount:  frequency.value === 'complete' ?  400000 : 280000,
-            price: frequency.value === 'complete' ? 40000000 : 28000000,
-            description:
-                'Become a full-stack developer with our comprehensive bootcamp that covers both frontend and backend development. Learn how to build dynamic and responsive web applications using popular technologies such as React, Node.js, Express, and MongoDB, and acquire the skills necessary to take on any web development project with confidence.',
-            icon: DeviceClockIcon
-        }
-    ];
+  const features = [
+    {
+      name: 'Frontend Development',
+      imageUrl: frontend,
+      amount: frequency.value === 'complete' ? 200000 : 140000,
+      price: frequency.value === 'complete' ? 20000000 : 14000000,
+      description:
+        'Learn the essential skills and tools needed to build stunning user interfaces from veteran tutors. Get hands-on experience with popular frameworks and languages such as React, Vue.js, HTML, CSS, and JavaScript to kickstart your career in web development.',
+      icon: DeviceArrowIcon
+    },
+    {
+      name: 'Backend Development',
+      imageUrl: backend,
+      amount: frequency.value === 'complete' ? 200000 : 140000,
+      price: frequency.value === 'complete' ? 20000000 : 14000000,
+      description:
+        'Our backend development bootcamp will equip you with the knowledge and practical skills needed to build robust and scalable server-side applications. Learn how to work with popular programming languages and frameworks like Node.js, Express, and MongoDB to build RESTful APIs and manage databases, and take your career in web development to the next level.',
+      icon: DeviceCardsIcon
+    },
+    {
+      name: 'Full Stack Development',
+      imageUrl: fullStack,
+      amount: frequency.value === 'complete' ? 400000 : 280000,
+      price: frequency.value === 'complete' ? 40000000 : 28000000,
+      description:
+        'Become a full-stack developer with our comprehensive bootcamp that covers both frontend and backend development. Learn how to build dynamic and responsive web applications using popular technologies such as React, Node.js, Express, and MongoDB, and acquire the skills necessary to take on any web development project with confidence.',
+      icon: DeviceClockIcon
+    }
+  ]
   return (
     <section
       id='secondary-features'
@@ -160,38 +159,40 @@ function classNames(...classes) {
       <Container>
         <div className='mx-auto max-w-2xl sm:text-center md:max-w-4xl'>
           <h2 className='text-3xl font-medium tracking-tight text-gray-900'>
-            Courses Offered.
+            Flexible Payment Option.
           </h2>
           <p className='mt-2 text-lg text-gray-600'>
-            We train individuals in an immersive learning environment that will
-            challenge them to develop new skills and push themselves to new
-            heights in developing software. We offer flexible payment options,
-            including the choice of paying just 70% of the total amount as the
-            first installment. This allows you to start your training without
-            any financial burden and pay the remaining amount in a more
-            manageable way.
+            We understand that financing your education can be challenging,
+            which is why we've developed a payment plan that helps you get
+            started on your academic journey without breaking the bank. With our
+            flexible payment option, you only need to pay 70% of your tuition
+            fees as your first instalment, allowing you to save money and manage
+            your finances more efficiently. The remaining balance can be paid
+            during the course of the programme.
           </p>
         </div>
-        <div className="mt-16 flex justify-center">
+        <div className='mt-16 flex justify-center'>
           <RadioGroup
-              value={frequency}
-              onChange={setFrequency}
-              className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
+            value={frequency}
+            onChange={setFrequency}
+            className='grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200'
           >
-            <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
+            <RadioGroup.Label className='sr-only'>
+              Payment Process
+            </RadioGroup.Label>
             {frequencies.map((option) => (
-                <RadioGroup.Option
-                    key={option.value}
-                    value={option}
-                    className={({ checked }) =>
-                        classNames(
-                            checked ? 'bg-indigo-600 text-white' : 'text-gray-500',
-                            'cursor-pointer rounded-full px-2.5 py-1'
-                        )
-                    }
-                >
-                  <span>{option.label}</span>
-                </RadioGroup.Option>
+              <RadioGroup.Option
+                key={option.value}
+                value={option}
+                className={({ checked }) =>
+                  classNames(
+                    checked ? 'bg-[#D31A86] text-white' : 'text-gray-500',
+                    'cursor-pointer rounded-full px-6 py-3'
+                  )
+                }
+              >
+                <span>{option.label}</span>
+              </RadioGroup.Option>
             ))}
           </RadioGroup>
         </div>
